@@ -283,12 +283,52 @@ func pruneAppState(home string) error {
 			"feegrant", // feegrant.StoreKey,
 			"authz",    // authzkeeper.StoreKey,
 			// custom modules
-			"iscn",     // iscntypes.StoreKey,
-			"nft",      // nftkeeper.StoreKey,
-		        "likenft",  // likenfttypes.StoreKey,
+			"iscn",    // iscntypes.StoreKey,
+			"nft",     // nftkeeper.StoreKey,
+			"likenft", // likenfttypes.StoreKey,
 		)
 
 		for key, value := range likecoinKeys {
+			keys[key] = value
+		}
+	} else if app == "teritori" {
+		// https://github.com/TERITORI/teritori-chain/blob/main/app/app.go#L323
+		teritoriKeys := types.NewKVStoreKeys(
+			// common modules
+			"feegrant",               // feegrant.StoreKey,
+			"authz",                  // authzkeeper.StoreKey,
+			"packetfowardmiddleware", // routertypes.StoreKey,
+			"icahost",                // icahosttypes.StoreKey,
+			"wasm",                   // wasm.StoreKey,
+			// custom modules
+			"airdrop", // airdroptypes.StoreKey,
+		)
+
+		for key, value := range teritoriKeys {
+			keys[key] = value
+		}
+	} else if app == "jackal" {
+		// https://github.com/JackalLabs/canine-chain/blob/master/app/app.go#L347
+		jackalKeys := types.NewKVStoreKeys(
+			// common modules
+			"feegrant", // feegrant.StoreKey,
+			"authz",    // authzkeeper.StoreKey,
+			"wasm",     // wasm.StoreKey,
+			"icahost",  // icahosttypes.StoreKey,
+			// custom modules
+			"icacontroller", // icacontrollertypes.StoreKey, https://github.com/cosmos/ibc-go/blob/main/modules/apps/27-interchain-accounts/controller/types/keys.go#L5
+			// intertx is a demo and not an officially supported IBC team implementation
+			"intertx",       // intertxtypes.StoreKey, https://github.com/cosmos/interchain-accounts-demo/blob/8d4683081df0e1945be40be8ac18aa182106a660/x/inter-tx/types/keys.go#L4
+			"rns",           // rnsmoduletypes.StoreKey, https://github.com/JackalLabs/canine-chain/blob/master/x/rns/types/keys.go#L5
+			"storage",       // storagemoduletypes.StoreKey, https://github.com/JackalLabs/canine-chain/blob/master/x/storage/types/keys.go#L5
+			"dsig",          // dsigmoduletypes.StoreKey, https://github.com/JackalLabs/canine-chain/blob/master/x/dsig/types/keys.go#L5
+			"filetree",      // filetreemoduletypes.StoreKey, https://github.com/JackalLabs/canine-chain/blob/master/x/filetree/types/keys.go#L5
+			"notifications", // notificationsmoduletypes.StoreKey, https://github.com/JackalLabs/canine-chain/blob/master/x/notifications/types/keys.go#L5
+			"jklmint",       // jklmintmoduletypes.StoreKey, https://github.com/JackalLabs/canine-chain/blob/master/x/jklmint/types/keys.go#L7
+			"lp",            // lpmoduletypes.StoreKey, https://github.com/JackalLabs/canine-chain/blob/master/x/lp/types/keys.go#L5
+		)
+
+		for key, value := range jackalKeys {
 			keys[key] = value
 		}
 	} else if app == "kichain" {
@@ -395,6 +435,15 @@ func pruneAppState(home string) error {
 		)
 
 		for key, value := range vidulumKeys {
+			keys[key] = value
+		}
+	} else if app == "beezee" {
+		beezeeKeys := types.NewKVStoreKeys(
+			"feegrant", // feegrant.StoreKey,
+			"scavenge", //scavengemodule.Storekey,
+		)
+
+		for key, value := range beezeeKeys {
 			keys[key] = value
 		}
 	} else if app == "provenance" {
@@ -522,6 +571,7 @@ func pruneAppState(home string) error {
 			"vote",       // voteTypes.StoreKey,
 			"evm",        // evmTypes.StoreKey,
 			"snapshot",   // snapTypes.StoreKey,
+			"multisig",   // multisigTypes.StoreKey,
 			"tss",        // tssTypes.StoreKey,
 			"nexus",      // nexusTypes.StoreKey,
 			"axelarnet",  // axelarnetTypes.StoreKey,
@@ -543,17 +593,17 @@ func pruneAppState(home string) error {
 			keys[key] = value
 		}
 	} else if app == "desmos" {
+	    // https://github.com/desmos-labs/desmos/blob/master/app/app.go#L388
 		desmosKeys := types.NewKVStoreKeys(
 			// common modules
-			"feegrant",      // feegrant.StoreKey,
-			"wasm",          // wasm.StoreKey,
-			"authz",         // authzkeeper.StoreKey,
-			// mainnet
-			"profiles",      // profilestypes.StoreKey,
-			// testnet
+			"feegrant", // feegrant.StoreKey,
+			"wasm",     // wasm.StoreKey,
+			"authz",    // authzkeeper.StoreKey,
+			// mainnet since v4.7.0
+			"profiles", // profilestypes.StoreKey,
+			"relationships", // relationshipstypes.StoreKey,
 			"subspaces",     // subspacestypes.StoreKey,
 			"posts",         // poststypes.StoreKey,
-			"relationships", // relationshipstypes.StoreKey,
 			"reports",       // reports.StoreKey,
 			"reactions",     // reactions.StoreKey,
 			"fees",          // fees.StoreKey,
